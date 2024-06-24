@@ -1,4 +1,4 @@
-## Scentronix assessment BE - NodeJS
+# Scentronix BE assessment
 
 ### Solution main files
 
