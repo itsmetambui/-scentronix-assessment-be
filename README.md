@@ -1,12 +1,19 @@
 ## Scentronix assessment BE - NodeJS
 
+### Solution main files
+
+- [servers.service.ts](https://github.com/itsmetambui/scentronix-assessment-be/blob/main/src/servers/servers.service.ts)
+- [servers.service.spec.ts](https://github.com/itsmetambui/scentronix-assessment-be/blob/main/src/servers/servers.service.spec.ts)
+
+
+
+#### Requirements
+
 Create a function/method that can assess a list of webservers and then returns
 a server with the lowest priority. Also create a unit test that can check if
 the function/method works as expected.
 
 ![diagram|301x481](https://gitlab.com/scentronix/assessments/web-interviews/-/raw/master/fullstack/images/backend.jpeg)
-
-#### Requirements
 
 - A `findServer()` function which returns a Promise that either:
   - Resolves and return an online server with the lowest priority.
