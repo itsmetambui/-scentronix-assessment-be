@@ -10,7 +10,6 @@ import {
   of,
   timeout,
 } from 'rxjs';
-import { servers } from './constant/servers';
 import { ServersConfigService } from './servers-config.service';
 
 @Injectable()
@@ -53,7 +52,12 @@ export class ServersService {
   private isOnline(server: Server) {
     return this.httpService.get(server.url).pipe(
       timeout(this.serversConfigService.getConfiguredTimeout()),
-      map(() => ({ ...server, isOnline: true }) as ServerWithStatus),
+      map((result) => {
+        return {
+          ...server,
+          isOnline: 200 <= result.status && result.status <= 299,
+        } as ServerWithStatus;
+      }),
       catchError(() => {
         return of({ ...server, isOnline: false } as ServerWithStatus);
       }),
@@ -65,6 +69,4 @@ export class ServersService {
       prev.priority > cur.priority ? cur : prev,
     );
   };
-
-  pr;
 }

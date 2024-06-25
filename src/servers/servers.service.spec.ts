@@ -87,11 +87,7 @@ describe('ServersService', () => {
       url === servers[0].url
         ? throwError(() => new Error())
         : of({
-            data: {},
             status: 200,
-            statusText: 'OK',
-            headers: {},
-            config: {},
           } as AxiosResponse),
     );
 
@@ -107,6 +103,16 @@ describe('ServersService', () => {
     jest
       .spyOn(httpService, 'get')
       .mockImplementation(() => throwError(() => new Error()));
+
+    await expect(service.findServer()).rejects.toThrow('No servers available');
+  });
+
+  it('should throw an error when no servers are online with statuses that are considered offline', async () => {
+    jest.spyOn(httpService, 'get').mockImplementation(() =>
+      of({
+        status: 301,
+      } as AxiosResponse),
+    );
 
     await expect(service.findServer()).rejects.toThrow('No servers available');
   });
